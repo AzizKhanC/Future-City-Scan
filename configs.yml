@@ -1,0 +1,127 @@
+# city_inputs file
+# city basic info /path/to/root/
+city_name: 'Chittagong'
+base_dir:  'D:/Aziz/GFDRR/CRP/FCS/'   
+# AOI_path: "D:/Aziz/GFDRR/CRP/FCS/output/shapefiles/Buffered_Chittagong_Final.shp"
+# AOI_path: "D:/Aziz/GFDRR/CRP/FCS/output/02-process-output/shapefiles/AOI_Chittagong_Final.shp"
+AOI_path: "D:/Aziz/GFDRR/CRP/FCS/01-inputs/shapefiles/AOI_Chittagong_Final.shp"
+AOI_path_countries: "D:/Aziz/GFDRR/CRP/FCS/01-inputs/shapefiles/WB_countries_Admin0_10m.shp"
+country_name: 'Bangladesh'
+country_iso3: 'BGD'
+
+# put False as default value if no data exists for a city
+flood_source: False
+impervious_source: False
+
+
+# global_inputs file
+# data sources
+flood_source: 'D:/Aziz/GFDRR/CRP/FCS/data/fathom' 
+# data outputs
+cloud_bucket: 'gee-test-20231019'
+# flood analysis parameters
+flood:
+  threshold: 15  # unit: cm
+  year:
+    - 2020
+    - 2030
+    - 2050
+    - 2080
+  ssp:
+    - 1
+    - 2
+    - 3
+    - 5
+  prob_cutoff:  # unit: %
+    - 1
+    - 10
+  rps:
+    - 10
+    - 100
+    - 1000
+    - 20
+    - 200
+    - 50
+    - 500
+
+# accessibility analysis parameters
+osm_query:
+  schools:
+    amenity:
+      - school
+      - kindergarten
+      - university
+      - college
+  health:
+    amenity:
+      - clinic
+      - hospital
+      - health
+  police:
+    amenity:
+      - police
+  fire:
+    amenity:
+      - fire_station
+isochrone:  # unit: m
+  schools:
+    - 800
+    - 1600
+    - 2400
+  health:
+    - 1000
+    - 2000
+    - 3000
+
+# FWI date range
+fwi_first_year: 2016
+fwi_last_year: 2021
+
+
+#  menuymlyml
+
+# raster processing
+# if the first item is False, all other items in this section will be skipped
+raster_processing: True
+population: True
+wsf: True
+elevation: True
+slope: True
+solar: False
+air: False
+flood_coastal: True
+flood_fluvial: True
+flood_pluvial: True
+landslide: True
+liquefaction: True
+impervious: False
+demographics: True
+
+# GEE
+landcover: False
+summer_lst: True
+nightlight: True #
+green: False
+forest: False
+ndmi: False
+
+# accessibility
+accessibility: False
+
+# RWI
+rwi: False
+
+# wildfire
+burned_area: False
+fwi: False
+landcover_burn: True
+
+# road network
+road_network: True
+
+# stats
+# flood_timeline and earthquake_timeline unclear
+all_stats: False
+
+# toolbox
+toolbox: True

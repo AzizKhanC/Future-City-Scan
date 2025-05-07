@@ -129,7 +129,7 @@ def reproject_rasters(crs , unprojected_raster, projected_raster):
 
 
 
-def reproject_and_clip_raster(input_raster, shapefile, output_raster, target_epsg, multiply_factor=1.0):
+def reproject_and_clip_raster(input_raster, shapefile, output_raster, target_epsg, multiply_factor=1):
     """Reproject, clip, and apply a multiplication factor to each pixel in a raster, setting NoData and negative values to 0."""
     
     # Open the input raster
@@ -157,7 +157,7 @@ def reproject_and_clip_raster(input_raster, shapefile, output_raster, target_eps
     format="GTiff",
     cutlineDSName=shapefile,        # Shapefile for clipping boundary
     cropToCutline=True,             # Crop to the shapefile's bounding box
-    cutlineBlend=0.0,               # Prevents feathering along the edges
+    # cutlineBlend=0.0,               # Prevents feathering along the edges
     dstSRS=target_proj.ExportToWkt(), # Set target projection without alpha band
     warpOptions=["CUTLINE_ALL_TOUCHED=TRUE"] # Ensures that features touching the cutline are included
     )
