@@ -694,8 +694,8 @@ def pop_exposure(pop_raster, input_raster, flood_threshold):
     file_stem = Path(file).stem
     base_path = os.path.join(base_path, "Population_exposure")
     create_dir_recursive(base_path)
-    out_raster_final=str(Path(os.path.join(base_path, file_stem)))
-    out_raster_final=out_raster_final.replace("max_exposure_", "final_")
+    out_raster_final=str(Path(os.path.join(base_path, f"{file_stem}.tif")))
+    out_raster_final=out_raster_final.replace("max_exposure_", "final_population_exposure_")
     
     out=gdal_calc.Calc(calc="A*B/100", A=out_raster_a , B=out_raster_b, outfile=out_raster_final, type="Int16", overwrite=True, extent="intersect", NoDataValue=0)
     pop_rasterArray = convert_raster_array(pop_raster)
@@ -880,7 +880,7 @@ def assess_flood_exposure(fluvial_raster,pluvial_raster,coastal_raster,exposure_
     ###################### Coastal city_vector ######################
     flood_type="Coastal"
     output_folder=Path(create_dir_recursive(f"{fathom_alignment_folder}/{flood_type}/{Year}/{ssp}/{flood_type}_{ssp}_{Year}"))
-    raster_name = f"cropped_warped_{flood_type}_{ssp}_{Year}_1in{return_period}{raster_keyword}tif"
+    raster_name = f"cropped_warped_{flood_type}_{ssp}_{Year}_1in{return_period}{raster_keyword}.tif"
     # export
     cFloodAligned_outputfile = vrtWarp(coastal_raster, output_folder,  vrt_options, city, raster_name)
     # At this point the coastal flood file is aligned and has been cropped to the pop bounding box
@@ -1260,9 +1260,9 @@ def conduct_infra_exposure_analysis(output, tables ,shapefiles, flood_bins,flood
                     file_stem = Path(roads_with_flood_depth).stem
                     base_path = os.path.join(base_path, "Roads_exposure")
                     create_dir_recursive(base_path)
-                    out_raster_final=str(Path(os.path.join(base_path, file_stem)))
+                    out_raster_final=str(Path(os.path.join(base_path,  f"{file_stem}.tif")))
                     out_raster_final=out_raster_final.replace("roads_flood_depth", "final")
-                    out_raster_final=out_raster_final.replace("finalmax_exposure_", "final_")
+                    out_raster_final=out_raster_final.replace("finalmax_exposure_", "final_road_exposure_")
                     roads_with_flood_depth=out_raster_final
                     
                     
@@ -1321,9 +1321,9 @@ def conduct_infra_exposure_analysis(output, tables ,shapefiles, flood_bins,flood
                             file_stem = Path(roads_with_flood_depth).stem
                             base_path = os.path.join(base_path, "Roads_exposure")
                             create_dir_recursive(base_path)
-                            out_raster_final=str(Path(os.path.join(base_path, file_stem)))
+                            out_raster_final=str(Path(os.path.join(base_path,  f"{file_stem}.tif")))
                             out_raster_final=out_raster_final.replace("roads_flood_depth", "final")
-                            out_raster_final=out_raster_final.replace("finalmax_exposure_", "final_")
+                            out_raster_final=out_raster_final.replace("finalmax_exposure_", "final_road_exposure_")
                             roads_with_flood_depth=out_raster_final
                             roads_with_flood_depth_classified=str(Path(infra_output_folder) / f"roads_classified{str(raster_stem)}") 
 
